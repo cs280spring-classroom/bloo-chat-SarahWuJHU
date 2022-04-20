@@ -23,6 +23,14 @@ app.get("/chatroom", (req, res) => {
   res.render("chatroom.njk", { uname: req.query.uname });
 });
 
+app.get("/login", (req, res) => {
+  res.render("login.njk", null);
+})
+
+app.get("/register", (req, res) => {
+  res.render("register.njk", null);
+})
+
 io.on("connection", function (socket) {
   let theUsr;
   socket.on("log on", (usr) => {

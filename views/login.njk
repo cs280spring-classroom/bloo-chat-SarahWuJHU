@@ -1,0 +1,15 @@
+{% extends "parent.njk" %}
+{% block content %}
+    <h1>Log In</h1>
+{% endblock %}
+{% block form %}
+  <form action="/" id="loginForm">
+    <label for="username" id="uname">{{ uname }}</label>
+    <input name="username" id="txt" autocomplete="off" autofocus="on" placeholder="Username"/>
+    <label for="password" id="pword">{{ pword }}</label>
+    <input name="password" id="txt" autocomplete="off" autofocus="on" placeholder="Password"/>
+    <button>Log In</button>
+  </form>
+{% endblock %}
+{% block script %}
+{% endblock %}

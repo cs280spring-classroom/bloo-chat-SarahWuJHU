@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", (_event) => {
   const form = document.getElementById("chatForm");
   const messages = document.getElementById("messages");
   const messageToSend = document.getElementById("txt");
+  const appName = "BlooChatApp";
+
   form.addEventListener("submit", (event) => {
     socket.emit("message", {
       user: username,
@@ -17,39 +19,39 @@ document.addEventListener("DOMContentLoaded", (_event) => {
 
   // append the chat text message
   socket.on("message", (msg) => {
-    const message = document.createElement("li");
-    //XSS vulnaribility
-    message.innerHTML = `<strong>${msg.user}</strong>: ${msg.message}`;
-    placeText(messages, message);
+    createMessage(msg.user, msg.message, "text_normal", messages);
   });
 
   socket.on("log on", (usr) => {
-    const message = document.createElement("li");
-    message.innerText = `${usr.name} joined the room`;
-    placeText(messages, message);
+    createMessage(appName, `${usr.name} joined the room`, "text_green", messages);
   });
 
   socket.on("log off", (usr) => {
-    const message = document.createElement("li");
-    message.innerText = `${usr.name} left the room`;
-    placeText(messages, message);
+    createMessage(appName, `${usr.name} left the room`, "text_red", messages);
   });
 
-  socket.on("welcome", (welc) =>{
-    const message1 = document.createElement("li");
-    message1.innerText = `Welcome ${welc.name}!`;
-    placeText(messages, message1);
-    const message2 = document.createElement("li");
-    if(welc.users == false){
-      message2.innerText = `Unfortunately no one is online at the moment 😔`;
-    }else{
-      message2.innerText = `Online users: ${welc.users}`;
+  socket.on("welcome", (welc) => {
+    createMessage(appName, `Welcome ${welc.name}!`, "text_normal", messages);
+    if (welc.users == false) {
+      createMessage(appName, `Unfortunately no one is online at the moment 😔`, "text_normal", messages);
+    } else {
+      createMessage(appName, `Online users: ${welc.users}`, "text_normal", messages);
     }
-    placeText(messages, message2);
-  })
+  });
 });
 
-function placeText(messages, message){
+function createMessage(username, msg, text_class, messages) {
+  const message = document.createElement("li");
+  const user = document.createElement("span");
+  const text = document.createElement("span");
+  user.className = "user_badge";
+  text.className = text_class;
+  user.innerText = `${username}`;
+  text.innerText = `${msg}`;
+  //XSS vulnaribility
+  message.appendChild(user);
+  message.appendChild(text);
   messages.appendChild(message);
   messages.scrollTop = messages.scrollHeight;
 }
+
