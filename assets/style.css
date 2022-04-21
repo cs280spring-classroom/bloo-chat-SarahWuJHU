@@ -24,6 +24,23 @@ form {
   width: 100%;
 }
 
+div {
+  background: #fff;
+  padding: 3px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+button{
+  width: 14%;
+  background: #000051;
+  border: none;
+  padding: 10px;
+  margin-left: 2%;
+  color: white;
+}
+
 form input {
   padding: 10px;
   width: 80%;

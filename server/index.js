@@ -25,11 +25,11 @@ app.get("/chatroom", (req, res) => {
 
 app.get("/login", (req, res) => {
   res.render("login.njk", null);
-})
+});
 
 app.get("/register", (req, res) => {
   res.render("register.njk", null);
-})
+});
 
 io.on("connection", function (socket) {
   let theUsr;

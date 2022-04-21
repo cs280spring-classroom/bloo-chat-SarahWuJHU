@@ -5,8 +5,12 @@
       Bloo Chat!</h1>
 {% endblock %}
 {% block form %}
-  <form action="/chatroom" id="chatForm">
-    <input name="uname" id="txt" autocomplete="off" autofocus="on" placeholder="type your nickname here..."/>
-    <button>Join</button>
-  </form>
+  <div>
+    <button id="log_in" onclick="logInClicked()"> Log In </button>
+    <button id="register" onclick="registerClicked()">Register</button>
+  </div>
 {% endblock %}
+{% block script %}
+<script src="frontpage.js"></script>
+{% endblock %}
+
