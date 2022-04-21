@@ -5,6 +5,10 @@ const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const UserDao = require("./data/UserDao");
+const db = require("./data/db");
+const auth = require("./routes/auth.js");
+
+db.connect();
 const users = new UserDao();
 const port = process.env.PORT || 7000;
 const usrs = [];
@@ -14,6 +18,8 @@ nunjucks.configure("views", {
   express: app,
 });
 
+// routing
+app.use(auth);
 app.use(express.static("assets"));
 
 app.get("/", (req, res) => {
@@ -22,39 +28,6 @@ app.get("/", (req, res) => {
 
 app.get("/chatroom", (req, res) => {
   res.render("chatroom.njk", { uname: req.query.uname });
-});
-
-app.get("/login", (req, res) => {
-  res.render("login.njk", null);
-});
-
-app.get("/register", (req, res) => {
-  res.render("register.njk", null);
-});
-
-app.get("/api/register", async (req, res) => {
-  const { username, role } = req.query;
-  if (username && role) {
-    res.status(400).json({
-      message:
-        "You must query the database based on either a username or user role.",
-    });
-  } else {
-    const data = username
-      ? await users.readOne(username)
-      : await users.readAll(role);
-    res.json({ data: data ? data : [] });
-  }
-});
-
-app.post("/api/register", async (req, res) => {
-  try {
-    const { username, password, role } = req.body;
-    const data = await users.create({ username, password, role });
-    res.status(201).json({ data });
-  } catch (err) {
-    res.status(err.status).json({ message: err.message });
-  }
 });
 
 io.on("connection", function (socket) {

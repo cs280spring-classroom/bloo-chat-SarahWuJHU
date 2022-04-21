@@ -5,9 +5,11 @@
       Bloo Chat!</h1>
 {% endblock %}
 {% block form %}
-  <div>
-    <button id="log_in" onclick="logInClicked()"> Log In </button>
-    <button id="register" onclick="registerClicked()">Register</button>
+  <div id="userForm">
+    <input name="username" id="usrnm" autocomplete="off" autofocus="on" placeholder="Username"/>
+    <input name="password" id="pswrd" autocomplete="off" autofocus="on" placeholder="Password"/>
+    <button id="login">Log In</button>
+    <button id="register">Register</button>
   </div>
 {% endblock %}
 {% block script %}
