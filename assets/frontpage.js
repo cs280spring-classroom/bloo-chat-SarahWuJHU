@@ -1,16 +1,29 @@
-const username = document.getElementById("usrnm");
-const password = document.getElementById("pswrd");
 const login = document.getElementById("login");
 const register = document.getElementById("register");
 login.addEventListener("click", logInClicked);
 register.addEventListener("click", registerClicked);
 
-function logInClicked() {
+async function logInClicked() {
   console.log("log in clicked");
 }
 
-function registerClicked() {
+async function registerClicked() {
   console.log("register clicked");
+  const username = document.getElementById("usrnm").value;
+  const password = document.getElementById("pswrd").value;
+  
+  const response = await fetch("/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      password
+    }),
+  });
+
+  console.log(response);
 }
 
 async function Register(event) {
@@ -18,7 +31,7 @@ async function Register(event) {
   
   const role = "CLIENT";
 
-  const response = await fetch("/api/register", {
+  const response = await fetch("/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

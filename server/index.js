@@ -4,12 +4,12 @@ const express = require("express");
 const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
-const UserDao = require("./data/UserDao");
 const db = require("./data/db");
 const auth = require("./routes/auth.js");
+const UserDao = require("./data/UserDao");
 
-db.connect();
 const users = new UserDao();
+db.connect();
 const port = process.env.PORT || 7000;
 const usrs = [];
 
@@ -28,6 +28,16 @@ app.get("/", (req, res) => {
 
 app.get("/chatroom", (req, res) => {
   res.render("chatroom.njk", { uname: req.query.uname });
+});
+
+app.post("/register", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const data = await users.create({ username, password, role: "CLIENT" });
+    res.status(201).json({data});
+  } catch (err) {
+    res.status(err.status || 500).json({ message: err.message});
+  }
 });
 
 io.on("connection", function (socket) {

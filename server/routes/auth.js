@@ -3,17 +3,17 @@ const UserDao = require("../data/UserDao");
 
 const router = express.Router();
 const users = new UserDao();
-
+/*
 router.post("/register", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password } = req.params;
     const data = await users.create({ username, password, role: "CLIENT" });
-    res.status(201).json({ data });
+    res.status(201).json({data});
   } catch (err) {
-    res.status(err.status || 500).json({ message: err.message });
+    res.status(err.status || 500).json({ message: err.message});
   }
 });
-
+*/
 router.post("/authenticate", async (req, res) => {
   const { username, password } = req.body;
 
