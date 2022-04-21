@@ -31,9 +31,11 @@ app.get("/chatroom", (req, res) => {
 });
 
 io.on("connection", function (socket) {
+  //storing the username
   let theUsr;
   socket.on("log on", (usr) => {
     theUsr = usr.name;
+    //not sending the message to the socket that emmitted it
     socket.broadcast.emit("log on", { name: theUsr });
     socket.emit("welcome", { name: theUsr, users: usrs });
     usrs.push(theUsr);
