@@ -23,7 +23,12 @@ document.addEventListener("DOMContentLoaded", (_event) => {
   });
 
   socket.on("log on", (usr) => {
-    createMessage(appName, `${usr.name} joined the room`, "text_green", messages);
+    createMessage(
+      appName,
+      `${usr.name} joined the room`,
+      "text_green",
+      messages
+    );
   });
 
   socket.on("log off", (usr) => {
@@ -33,9 +38,19 @@ document.addEventListener("DOMContentLoaded", (_event) => {
   socket.on("welcome", (welc) => {
     createMessage(appName, `Welcome ${welc.name}!`, "text_normal", messages);
     if (welc.users == false) {
-      createMessage(appName, `Unfortunately no one is online at the moment 😔`, "text_normal", messages);
+      createMessage(
+        appName,
+        `Unfortunately no one is online at the moment 😔`,
+        "text_normal",
+        messages
+      );
     } else {
-      createMessage(appName, `Online users: ${welc.users}`, "text_normal", messages);
+      createMessage(
+        appName,
+        `Online users: ${welc.users}`,
+        "text_normal",
+        messages
+      );
     }
   });
 });
@@ -54,4 +69,3 @@ function createMessage(username, msg, text_class, messages) {
   messages.appendChild(message);
   messages.scrollTop = messages.scrollHeight;
 }
-

@@ -37,7 +37,7 @@ router.post("/authenticate", async (req, res) => {
     } else {
       return res.json({
         message: "Authentication successful!",
-        data:user,
+        data: user,
       });
     }
   } catch (err) {

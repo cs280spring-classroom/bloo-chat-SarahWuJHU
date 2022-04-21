@@ -32,7 +32,7 @@ div {
   width: 100%;
 }
 
-button{
+button {
   width: 14%;
   background: #000051;
   border: none;
@@ -77,23 +77,23 @@ form button {
   padding: 5px 10px;
 }
 
-.user_badge{
+.user_badge {
   font-weight: bold;
   background-color: #312323;
   padding: 2px 6px 2px 6px;
   border-radius: 6px;
 }
 
-.text_normal{
+.text_normal {
   padding: 2px 6px 2px 6px;
 }
 
-.text_green{
+.text_green {
   padding: 2px 6px 2px 6px;
   color: rgb(33, 184, 33);
 }
 
-.text_red{
+.text_red {
   padding: 2px 6px 2px 6px;
   color: rgb(255, 0, 0);
 }
