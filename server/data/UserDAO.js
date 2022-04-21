@@ -21,31 +21,6 @@ class UserDao {
     return user;
   }
 
-  // to update or reset password, or to change role.
-  async update(id, { password, role }) {
-    const user = await User.findByIdAndUpdate(
-      id,
-      { password, role },
-      { new: true, runValidators: true }
-    );
-
-    if (user === null) {
-      throw new ApiError(404, "There is no user with the given ID!");
-    }
-
-    return user;
-  }
-
-  async delete(id) {
-    const user = await User.findByIdAndDelete(id);
-
-    if (user === null) {
-      throw new ApiError(404, "There is no user with the given ID!");
-    }
-
-    return user;
-  }
-
   // returns an empty array if there is no user with the given ID
   async read(id) {
     const user = await User.findById(id);
