@@ -4,32 +4,30 @@ login.addEventListener("click", logInClicked);
 register.addEventListener("click", registerClicked);
 
 async function logInClicked() {
-  console.log("log in clicked");
-}
-
-async function registerClicked() {
-  console.log("register clicked");
   const username = document.getElementById("usrnm").value;
   const password = document.getElementById("pswrd").value;
-  
-  const response = await fetch("/register", {
+
+  const response = await fetch("/authenticate", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       username,
-      password
+      password,
     }),
   });
 
-  console.log(response);
+  if (response.status === 200) {
+    location.href = `/chatroom?uname=${username}`;
+  } else {
+    alert("Wrong password or username, try again!");
+  }
 }
 
-async function Register(event) {
-  event.preventDefault();
-  
-  const role = "CLIENT";
+async function registerClicked() {
+  const username = document.getElementById("usrnm").value;
+  const password = document.getElementById("pswrd").value;
 
   const response = await fetch("/register", {
     method: "POST",
@@ -39,9 +37,12 @@ async function Register(event) {
     body: JSON.stringify({
       username,
       password,
-      role
     }),
   });
 
-  console.log(response);
+  if (response.status === 201) {
+    location.href = `/chatroom?uname=${username}`;
+  } else {
+    alert("Invalid password or username, try again!");
+  }
 }

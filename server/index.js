@@ -1,18 +1,18 @@
+const db = require("./data/db");
+const auth = require("./routes/auth.js");
 const debug = require("debug")("bloo-chat");
 const nunjucks = require("nunjucks");
+
 const express = require("express");
 const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
-const db = require("./data/db");
-const auth = require("./routes/auth.js");
-const UserDao = require("./data/UserDao");
+const port = process.env.PORT || 5000;
 
-const users = new UserDao();
-db.connect();
-const port = process.env.PORT || 7000;
+db.connect(); // no need to await for it due to Mongoose buffering!
+
+app.use(express.json());
 const usrs = [];
-
 nunjucks.configure("views", {
   autoescape: true,
   express: app,
@@ -28,16 +28,6 @@ app.get("/", (req, res) => {
 
 app.get("/chatroom", (req, res) => {
   res.render("chatroom.njk", { uname: req.query.uname });
-});
-
-app.post("/register", async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    const data = await users.create({ username, password, role: "CLIENT" });
-    res.status(201).json({data});
-  } catch (err) {
-    res.status(err.status || 500).json({ message: err.message});
-  }
 });
 
 io.on("connection", function (socket) {
@@ -67,3 +57,4 @@ io.on("connection", function (socket) {
 http.listen(port, () => {
   console.log(`Express app listening at http://localhost:${port}`);
 });
+
