@@ -3,7 +3,6 @@ const ApiError = require("../model/ApiError");
 const { hashPassword } = require("../util/hashing");
 
 class UserDao {
-
   async create({ username, password, role }) {
     if (username === undefined || username === "") {
       throw new ApiError(400, "Every user must have a username!");

@@ -3,10 +3,8 @@
   <h1>Log In</h1>
 {% endblock %}
 {% block form %}
-  <form id="loginForm">
-    <label for="username" id="uname">{{ uname }}</label>
+  <form action="/api/users" id="loginForm">
     <input name="username" id="usrnm" autocomplete="off" autofocus="on" placeholder="Username"/>
-    <label for="password" id="pword">{{ pword }}</label>
     <input name="password" id="pswrd" autocomplete="off" autofocus="on" placeholder="Password"/>
     <button>Log In</button>
   </form>
