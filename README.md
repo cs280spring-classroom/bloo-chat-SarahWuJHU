@@ -24,3 +24,5 @@ On the client side, "index.njk" is connected to "frontpage.js", which post reque
 once the user is either registered or authenticated. "chatroom.njk" is connected to 
 "script.js". When the content of "chatroom.njk" is loaded, "script.js" establish a socket
 connection with io emit the user's messages. 
+
+App deployed at: https://bloo-chat-swu82.herokuapp.com/
