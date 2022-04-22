@@ -26,3 +26,4 @@ once the user is either registered or authenticated. "chatroom.njk" is connected
 connection with io emit the user's messages. 
 
 App deployed at: https://bloo-chat-swu82.herokuapp.com/
+Github Link: https://github.com/cs280spring-classroom/bloo-chat-SarahWuJHU.git
