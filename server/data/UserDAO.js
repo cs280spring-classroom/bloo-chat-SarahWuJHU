@@ -15,6 +15,7 @@ class UserDao {
     if (role !== "ADMIN" && role !== "CLIENT") {
       throw new ApiError(400, "Every user must have a valid role!");
     }
+    //hashing
     const hash = await hashPassword(password);
     const user = await User.create({ username, password: hash, role });
     return user;
